@@ -14,7 +14,145 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      app_management: {
+        Row: {
+          app_name: string
+          app_type: string | null
+          class_group_id: string | null
+          created_at: string
+          id: string
+        }
+        Insert: {
+          app_name: string
+          app_type?: string | null
+          class_group_id?: string | null
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          app_name?: string
+          app_type?: string | null
+          class_group_id?: string | null
+          created_at?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "app_management_class_group_id_fkey"
+            columns: ["class_group_id"]
+            isOneToOne: false
+            referencedRelation: "class_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      class_groups: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          school_year: string | null
+          student_count: number | null
+          teacher_id: string
+          updated_at: string
+          whitelisted_apps: string[] | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          school_year?: string | null
+          student_count?: number | null
+          teacher_id: string
+          updated_at?: string
+          whitelisted_apps?: string[] | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          school_year?: string | null
+          student_count?: number | null
+          teacher_id?: string
+          updated_at?: string
+          whitelisted_apps?: string[] | null
+        }
+        Relationships: []
+      }
+      student_profiles: {
+        Row: {
+          class_group_id: string | null
+          created_at: string
+          full_name: string
+          id: string
+          points: number | null
+          streak_days: number | null
+          updated_at: string
+          user_email: string | null
+        }
+        Insert: {
+          class_group_id?: string | null
+          created_at?: string
+          full_name: string
+          id?: string
+          points?: number | null
+          streak_days?: number | null
+          updated_at?: string
+          user_email?: string | null
+        }
+        Update: {
+          class_group_id?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          points?: number | null
+          streak_days?: number | null
+          updated_at?: string
+          user_email?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_profiles_class_group_id_fkey"
+            columns: ["class_group_id"]
+            isOneToOne: false
+            referencedRelation: "class_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_settings: {
+        Row: {
+          created_at: string
+          daily_limit_minutes: number | null
+          id: string
+          strict_mode: boolean | null
+          updated_at: string
+          user_id: string
+          weekend_mode: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          daily_limit_minutes?: number | null
+          id?: string
+          strict_mode?: boolean | null
+          updated_at?: string
+          user_id: string
+          weekend_mode?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          daily_limit_minutes?: number | null
+          id?: string
+          strict_mode?: boolean | null
+          updated_at?: string
+          user_id?: string
+          weekend_mode?: boolean | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
